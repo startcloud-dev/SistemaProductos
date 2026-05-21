@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormularioProducto</title>
+    <link rel="stylesheet" href="../css/estilos.css"> 
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Formulario de Producto</h1>
+        <div class="fila-campos"> 
+            <div class="grupo-campo">
+            <label for="txtCodigo" >Codigo</label>
+            <input type="text" name="txtCodigo" id="txtCodigo">
+            </div>
+            <div class="grupo-campo">
+            <label for="txtNombre">Nombre</label>
+            <input type="text"  name="txtNombre" id="txtNombre"  >
+            </div>
+        </div>
+        
+        <div class="fila-campos">
+            <div class="grupo-campo">
+                <label for="cboBodega">Bodega</label>
+                <select name="cboBodega" id="cboBodega"  >
+                <option value="">Seleccione una bodega</option>
+                </select>
+            </div>
+            <label for="cboSucursal">Sucursal</label>
+            <select name="cboSucursal" id="cboSucursal"  >
+            <option value="">Seleccione una Sucursal</option>
+            </select>
+        </div>
+         Moneda     
+        <select name="cboMoneda" id="cboMoneda"  >
+        <option value="">Seleccione una Moneda</option>
+        </select>
+
+        <label for="txtPrecio">Precio</label>
+        <input type="text" id="txtPrecio" name="txtPrecio" >
+
+        Material del producto
+        <input type="checkbox" name="idPlastico" value="plastico" id="idPlastico">Plastico
+        <input type="checkbox" name="idMetal" value="metal" id="idMetal">Metal
+        <input type="checkbox" name="IdMadera" value="madera" id="IdMadera">Madera
+        <input type="checkbox" name="idVidrio" value="vidrio" id="idVidrio">Vidrio
+        <input type="checkbox" name="idTextil" value="textil" id="idTextil">Textil
+
+        Descripcion
+        <textarea name="txtDescripcion" id="txtDescripcion" cols="30" rows="10"></textarea>
+
+         <button id="btnGuardarProducto">GuardarProducto</button>
+
+
+    </div>
+
+</body>
+</html>
