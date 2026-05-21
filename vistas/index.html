@@ -9,6 +9,7 @@
 <body>
     <div class="contenedor">
         <h1>Formulario de Producto</h1>
+ <form id="formProducto">
         <div class="fila-doble"> 
             <div class="grupo-campo">
             <label for="txtCodigo" >Codigo</label>
@@ -24,13 +25,13 @@
             <div class="grupo-campo">
                 <label for="cboBodega">Bodega</label>
                 <select name="cboBodega" id="cboBodega"  >
-                <option value="">Seleccione una bodega</option>
+                <option selected value="">Seleccione una bodega</option>
                 </select>
             </div>
            <div class="grupo-campo"> 
                 <label for="cboSucursal">Sucursal</label>
                 <select name="cboSucursal" id="cboSucursal"  >
-                <option value="">Seleccione una Sucursal</option>
+                <option selected value="">Seleccione una Sucursal</option>
                 </select>
             </div>
         </div>
@@ -39,7 +40,7 @@
             <div class="grupo-campo">
                 <label for="cboMoneda">Moneda</label>
                 <select name="cboMoneda" id="cboMoneda"  >
-                <option value="">Seleccione una Moneda</option>
+                <option selected value="">Seleccione una Moneda</option>
                 </select>
             </div>
             <div class="grupo-campo">
@@ -66,8 +67,8 @@
         <div class="contenedor-boton">
             <button type="submit" class="btn-guardar" id="btnGuardarProducto">GuardarProducto</button>
         </div>    
-
+</form>
     </div>
-
+<script src="/js/scriptProducto.js" ></script>
 </body>
 </html>
