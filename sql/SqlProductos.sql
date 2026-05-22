@@ -73,3 +73,11 @@ INSERT INTO moneda (nombre) VALUES
 ('PESO'),
 ('EURO')
 ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO material (nombre) VALUES 
+('plastico'),
+('metal'),
+('madera'),
+('vidrio'),
+('textil')
+ON CONFLICT (nombre) DO NOTHING;

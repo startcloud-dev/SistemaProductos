@@ -18,6 +18,12 @@ switch ($action) {
     case 'cargarCombos':
         $controlador->cargarCombos();
         break;
+    case 'guardarProducto':
+        $controlador->guardarProducto();
+        break;
+    case 'verificarCodigo':
+        $controlador->verificarCodigo();
+        break;
     default:
         http_response_code(400);
         echo json_encode(["status" => "error", "message" => "Acción no válida"]);
