@@ -17,7 +17,6 @@ class ProductoControlador{
     
             $data = [
             'bodegas' => $this->db->query("SELECT idBodega, nombre FROM bodega ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC),
-            'sucursales' => $this->db->query("SELECT idSucursal, nombre FROM sucursal ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC),
             'monedas' => $this->db->query("SELECT idMoneda, nombre FROM moneda ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC),
             'materiales' => $this->db->query("SELECT idMaterial, nombre FROM material ORDER BY nombre")->fetchAll(PDO::FETCH_ASSOC)
             ];
@@ -27,6 +26,26 @@ class ProductoControlador{
             http_response_code(500);
             echo json_encode(["status" => "error", "message" => "Error de lectura SQL: " . $e->getMessage()]);
        }
+    }
+
+    public function cargarSucursales($idBodega)
+    {
+        try {
+            if (empty($idBodega)) {
+                echo json_encode([]);
+                return;
+            }
+
+            $stmt = $this->db->prepare("SELECT idSucursal, nombre FROM sucursal WHERE idBodega = :idBodega ORDER BY nombre");
+            $stmt->bindValue(':idBodega', $idBodega, PDO::PARAM_INT);
+            $stmt->execute();
+            $sucursales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($sucursales);
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Error al cargar sucursales: " . $e->getMessage()]);
+        }
     }
 
     public function verificarCodigo() {

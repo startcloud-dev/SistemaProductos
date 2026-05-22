@@ -15,7 +15,9 @@ CREATE TABLE bodega (
 
 CREATE TABLE sucursal (
     idSucursal SERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL UNIQUE
+    nombre VARCHAR(50) NOT NULL UNIQUE,
+    idBodega INT,
+    CONSTRAINT fk_sucursal_bodega FOREIGN KEY (idBodega) REFERENCES bodega(idBodega) ON DELETE CASCADE
 );
 
 CREATE TABLE moneda (
@@ -62,10 +64,11 @@ INSERT INTO bodega (nombre) VALUES
 ('Bodega Norte')
 ON CONFLICT (nombre) DO NOTHING;
 
-INSERT INTO sucursal (nombre) VALUES 
-('Sucursal 1'),
-('Sucursal 2'),
-('Sucursal Oriente')
+INSERT INTO sucursal (nombre, idBodega) VALUES 
+('Sucursal 1', 1),
+('Sucursal 2', 1),
+('Sucursal Oriente', 2),
+('Sucursal Norte', 3)
 ON CONFLICT (nombre) DO NOTHING;
 
 INSERT INTO moneda (nombre) VALUES 

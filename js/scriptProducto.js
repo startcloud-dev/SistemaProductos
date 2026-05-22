@@ -13,7 +13,6 @@ fetch("/config/Enrutador.php?action=cargarCombos")
 
             const selectSucursal = document.getElementById('cboSucursal');
             selectSucursal.innerHTML = '<option selected value="">Seleccione una sucursal...</option>';
-            data.sucursales.forEach(s => selectSucursal.innerHTML += `<option value="${s.idsucursal}">${s.nombre}</option>`);
 
             const selectMoneda = document.getElementById('cboMoneda');
             selectMoneda.innerHTML = '<option selected value="">Seleccione una moneda...</option>';
@@ -21,9 +20,26 @@ fetch("/config/Enrutador.php?action=cargarCombos")
 
 })
 
+// Evento para cargar sucursales dependientes de la bodega
+document.getElementById('cboBodega').addEventListener('change', function() {
+    const idBodega = this.value;
+    const selectSucursal = document.getElementById('cboSucursal');
+    selectSucursal.innerHTML = '<option selected value="">Seleccione una sucursal...</option>';
+
+    if (idBodega !== '') {
+        fetch("/config/Enrutador.php?action=cargarSucursales&idBodega=" + idBodega)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(s => {
+                selectSucursal.innerHTML += `<option value="${s.idsucursal}">${s.nombre}</option>`;
+            });
+        });
+    }
+});
+
 
 const formProducto = document.getElementById('formProducto');
-formProducto.addEventListener('submit', (e) => {
+formProducto.addEventListener('submit', async (e) => {
     e.preventDefault();
 
  
@@ -72,7 +88,55 @@ formProducto.addEventListener('submit', (e) => {
                 return;
             }
 
-            
+        if (datos.nombre === "") {
+            alert("El nombre del producto no puede estar en blanco.");
+            return;
+        }
+
+        if (datos.nombre.length < 2 || datos.nombre.length > 50) {
+            alert("El nombre del producto debe tener entre 2 y 50 caracteres.");
+            return;
+        }
+
+        if(datos.precio ===""){
+            alert("El precio del producto no puede estar en blanco.");
+            return;
+        }      
+        const regexPrecio = /^\d+(\.\d{1,2})?$/.test(datos.precio);
+
+        if (!regexPrecio || parseFloat(datos.precio) <= 0) {
+            alert("El precio del producto debe ser un número positivo con hasta dos decimales.");
+            return;
+        }
+
+        if(datos.materiales.length<2){
+             alert("Debe seleccionar al menos dos materiales para el producto.");
+            return;
+        }
+
+        if(datos.idBodega ===""){
+             alert("Debe seleccionar una bodega.");
+            return;
+        }
+        
+           if(datos.idMoneda ===""){
+             alert("Debe seleccionar una moneda para el producto.");
+             return;
+            }
+
+               if(datos.idSucursal ===""){
+                alert("Debe seleccionar una sucursal para la bodega seleccionada.");
+                return;
+                }
+
+                if (datos.descripcion === '') {
+                alert("La descripción del producto no puede estar en blanco.");
+                return;
+            }
+            if (datos.descripcion.length < 10 || datos.descripcion.length > 1000) {
+                alert("La descripción del producto debe tener entre 10 y 1000 caracteres.");
+                return;
+            }
 
     fetch("/config/Enrutador.php?action=guardarProducto", {
         method: "POST",

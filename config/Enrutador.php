@@ -18,6 +18,9 @@ switch ($action) {
     case 'cargarCombos':
         $controlador->cargarCombos();
         break;
+    case 'cargarSucursales':
+        $controlador->cargarSucursales($_GET['idBodega'] ?? 0);
+        break;
     case 'guardarProducto':
         $controlador->guardarProducto();
         break;
